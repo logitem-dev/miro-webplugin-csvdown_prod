@@ -16,9 +16,8 @@ miro.onReady(() => {
 	        // Show success message
 	         miro.showNotification('Exportが正常に完了しました。')  
 			
-		}
+		    }
 
-        }
       }
     }
   })  
