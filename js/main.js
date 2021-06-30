@@ -4,10 +4,11 @@ const iconExportCsv = '<g id="Layer_23"><rect fill="none" height="2" width="6" x
 miro.onReady(() => {
   miro.initialize({
     extensionPoints: {
-      bottomBar: {
-        title: '勤怠CSVｱｯﾌﾟﾛｰﾄﾞ',
-        svgIcon: iconUpdCSV, 
-        positionPriority: 1,
+      toolbar: {
+        title: 'CSVﾀﾞｳﾝﾛｰﾄﾞ',
+        toolbarSvgIcon: iconExportCsv, 
+        librarySvgIcon: iconExportCsv, 
+        positionPriority: 2,
         onClick: async () => {
         
         	// 
