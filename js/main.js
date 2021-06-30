@@ -10,13 +10,78 @@ miro.onReady(() => {
         librarySvgIcon: iconExportCsv, 
         positionPriority: 2,
         onClick: async () => {
+
+          const client_id = '3074457358567435973';        // MetaData読み込み用
+
+          const frameclass = class{
+            constructor(name, x, y, width, height){
+              this.name = name;
+              this.x1 = x - width/2;
+              this.x2 = x + width/2;
+              this.y1 = y - height/2;
+              this.y2 = y + height/2;
+            }
+          }
+
+          var frames = [];
         
-        	// 
+          // 全エリアFrameオブジェクトの取得
+          let allFrames = await miro.board.widgets.get({type: 'Frame'});
+
+          // クラス配列に追加
+          allFrames.forEach(frame => {
+
+            frames.push(new frameclass(frame.title, frame.bounds.x, frame.y, frame.width, frame.bounds.height));
+          });
+
+          frames = frames.filter(frame=> !(frame.name === '出勤者' || frame.name === '休暇'));
+
+          // 全イメージオブジェクトの取得
+          let allCards = await miro.board.widgets.get({type: 'IMAGE'});
+
+          //ファイル名(yyyymmdd.csv)
+          var d = new Date();
+          var formatted = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + (d.getDate())).slice(-2);
+          const fileName = formatted + '.csv';
+          
+          var csvData = "";
+
+          allCards.forEach(card => {
+            var areaName = "";
+
+            var tojson = JSON.stringify(card.metadata);
+            var fromjson = JSON.parse(tojson);
+
+            if(([client_id] in fromjson) && ('staffid' in fromjson[client_id])){
+              var staffid = fromjson[client_id]['staffid'];
+              // カードがエリアFrameの範囲内に入っていたら出力する
+              for(let i=0; i< frames.length; i++){
+              	var frame = frames[i];
+                if(card.x >= frame.x1 && card.x <= frame.x2 && card.y >= frame.y1 && card.y <= frame.y2){
+                  areaName = frame.name;
+                  csvData+= staffid + "," + frame.name + "\n";
+                  break;
+                }
+              }
+            }
+
+          });
+
+          // CSVダウンロード
+          const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
+          const blob = new Blob([bom, csvData], { type: "text/csv" });
+          const url = (window.URL || window.webkitURL).createObjectURL(blob);
+          const download = document.createElement("a");
+          download.href = url;
+          download.download = fileName;
+          download.click();
+          //createObjectURLで作成したオブジェクトURLを開放する
+          (window.URL || window.webkitURL).revokeObjectURL(url);
 
 	        // Show success message
 	         miro.showNotification('Exportが正常に完了しました。')  
 			
-		    }
+		  }
 
       }
     }
