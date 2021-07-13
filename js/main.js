@@ -41,7 +41,7 @@ miro.onReady(() => {
 
           //ファイル名(yyyymmdd.csv)
           var d = new Date();
-          var formatted = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + (d.getDate())).slice(-2);
+          var formatted = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + (d.getDate())).slice(-2) + "_" + ('0' + (d.getHours())).slice(-2)  + ('0' + (d.getMinutes())).slice(-2)  + ('0' + (d.getSeconds())).slice(-2) ;
           const fileName = formatted + '.csv';
           
           var csvData = "";
