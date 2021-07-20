@@ -11,7 +11,7 @@ miro.onReady(() => {
         positionPriority: 2,
         onClick: async () => {
 
-          const client_id = '3074457361560843499';        // MetaData読み込み用
+          const client_id = '3074457361580288645';        // MetaData読み込み用
 
           const frameclass = class{
             constructor(name, x, y, width, height){
