@@ -34,7 +34,7 @@ miro.onReady(() => {
             frames.push(new frameclass(frame.title, frame.bounds.x, frame.y, frame.width, frame.bounds.height));
           });
 
-          frames = frames.filter(frame=> !(frame.name === '出勤者' || frame.name === '休暇'));
+          frames = frames.filter(frame=> !(frame.name === '出勤者'));
 
           // 全イメージオブジェクトの取得
           let allCards = await miro.board.widgets.get({type: 'IMAGE'});
