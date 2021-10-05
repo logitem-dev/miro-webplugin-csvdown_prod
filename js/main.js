@@ -39,10 +39,10 @@ miro.onReady(() => {
           // 全イメージオブジェクトの取得
           let allCards = await miro.board.widgets.get({type: 'IMAGE'});
 
-          //ファイル名(yyyymmdd.csv)
+          //ファイル名(Out_yyyymmdd.csv)
           var d = new Date();
           var formatted = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + (d.getDate())).slice(-2) + "_" + ('0' + (d.getHours())).slice(-2)  + ('0' + (d.getMinutes())).slice(-2)  + ('0' + (d.getSeconds())).slice(-2) ;
-          const fileName = formatted + '.csv';
+          const fileName = "Out_" + formatted + '.csv';
           
           var csvData = "";
 
