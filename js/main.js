@@ -5,14 +5,6 @@ miro.onReady(() => {
   miro.initialize({
     extensionPoints: {
       toolbar: {
-        title: 'CSVﾀﾞｳﾝﾛｰﾄﾞ(旧)',
-        toolbarSvgIcon: iconExportCsv, 
-        librarySvgIcon: iconExportCsv, 
-        positionPriority: 2,
-        onClick: async () => {
-
-	
-		  }
 
       }
     }
