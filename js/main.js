@@ -4,9 +4,6 @@ const iconExportCsv = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/sv
 miro.onReady(() => {
   miro.initialize({
     extensionPoints: {
-      toolbar: {
-
-      }
     }
   })  
 })
